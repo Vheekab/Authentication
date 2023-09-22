@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/blogDetails.css">
+</head>
+<body>
+    <div id="container">
+        <div id="container1">
+            <div><img src=<%= foundReader.image %> alt=""></div>
+            <div>
+                <h3><%= foundReader.fullname %></h3>
+                <p>@<%= foundReader.username %></p>
+            </div>
+        </div>
+        <div id="container2">
+            <div><img src=<%= articleDetails.image %> alt=""></div>
+            <h1><%= articleDetails.title %></h1>
+            <h3>Author: <%= articleDetails.fullname %></h3>
+            <h3>Category: <%= articleDetails.category %></h3>
+            <p><%= articleDetails.description %></p>
+        </div>
+    </div>
+</body>
+</html>

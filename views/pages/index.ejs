@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Blog Login!</h1>
+        <form action="/login" method="post">
+            <div>
+                <h3>Username</h3>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <h3>Password</h3>
+                <input type="password" name="password">
+                <p id="alert"><%= alert %></p>
+            </div>
+            <div id="checkbox">
+                <div>
+                    <input type="checkbox">
+                    <label>Remember Me</label>
+                </div>
+                <div><a href="/password">Forgot Password?</a></div>
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+            <div>
+                <p>Don't have an account? Sign up <a href="/signup">here</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

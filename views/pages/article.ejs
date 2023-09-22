@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/article.css">
+</head>
+<body>
+    <div id="container">
+        <form action="/sendarticle" method="post">
+            <h1>Create Article here</h1>    
+            <div>
+                <h3>Enter Title here</h3>
+                <input type="text" name="title">
+            </div>
+            <div>
+                <h3>Author's Name</h3>
+                <input type="text" name="fullname">
+            </div>
+            <div>
+                <h3>Enter the category</h3>
+                <input type="text" name="category">
+            </div>
+            <div>
+                <h3>Enter image url</h3>
+                <input type="text" name="image">
+            </div>
+            <div>
+                <h3>Enter your description</h3>
+                <input id="description" type="text" name="description">
+            </div>
+            <div><button type="submit">Submit</button></div>
+        </form>
+        <div>
+            <p><%= alert %></p>
+            <p>Go to Dashboard <a href="/dashboard">here</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Sign up to read articles</h1>
+        <form action="/register" method="post" enctype="multipart/form-data">
+            <div>
+                <h3>Enter your Full Name</h3>
+                <input type="text" name="fullname" id="">
+            </div>
+            <div>
+                <h3>Upload an image</h3>
+                <input type="file" name="image" accept="image/*">
+            </div>
+            <div>
+                <h3>Choose a Username</h3>
+                <input type="text" name="username" id="">
+            </div>
+            <div>
+                <h3>Enter a Password</h3>
+                <input type="password" name="password" id="">
+            </div>
+            <div>
+                <button type="submit">Register</button>
+                <p id="alert"><%= alert %></p>
+                <p>Login <a href="/">here!</a></p>
+            </div>
+            <div>
+                <a href="/createadmin">Admin?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
