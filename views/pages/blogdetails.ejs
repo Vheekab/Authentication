@@ -9,7 +9,7 @@
 <body>
     <div id="container">
         <div id="container1">
-            <div><img src=<%= foundReader.image %> alt=""></div>
+            <div><img src="data:<%= foundReader.image.contentType %>;base64,<%= foundReader.image.data.toString('base64') %>" alt="User Passport"></div>
             <div>
                 <h3><%= foundReader.fullname %></h3>
                 <p>@<%= foundReader.username %></p>

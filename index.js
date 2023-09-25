@@ -3,6 +3,7 @@ const app = express()
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 const flash = require('connect-flash')
+const mongodbsession = require('connect-mongodb-session')(session)
 
 const multer = require("multer")
 
@@ -15,6 +16,11 @@ const Blog = require('./model/articleSchema')
 const Admin = require('./model/createadminSchema')
 const Reader = require('./model/signupSchema')
 
+const mongodbStore = new mongodbsession({
+    uri: `mongodb+srv://${process.env.myUsername}:${process.env.myPassword}@cluster0.fansx3c.mongodb.net/`,
+    collection: 'usersession'
+})
+
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static('./'))
@@ -22,9 +28,20 @@ app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret: 'keyboard cat',
     saveUninitialized: true,
-    resave: true
+    resave: true,
+    store: mongodbStore
 }))
+
 app.use(flash())
+
+// how to create a middleware
+const userAuthentication = (req,res,next) => {
+    if (req.session.userAuthentication) {
+        next()
+    } else {
+        res.redirect('/')
+    }
+}
 
 app.get('/', (req, res) => {
     res.render('pages/index', {alert: req.flash('info')})
@@ -34,16 +51,16 @@ app.get('/signup', (req, res) => {
     res.render('pages/signup', {alert: req.flash('info')})
 })
 
-app.get('/blog', async (req, res) => {
+app.get('/blog', userAuthentication, async (req, res) => {
     const foundArticle = await Blog.find({})
     res.render('pages/blog', {foundReader, foundArticle})
 })
 
-// app.get('/:id', async (req, res) => {
-//     const {id} = req.params
-//     const articleDetails = await Blog.findById({_id: id})
-//     res.render('pages/blogdetails', {foundReader, articleDetails})
-// })
+app.get('/blogdetails/:id', async (req, res) => {
+    const {id} = req.params
+    const articleDetails = await Blog.findOne({_id:id})
+    res.render('pages/blogdetails', {foundReader, articleDetails})
+})
 
 app.get('/password', (req, res) => {
     res.render('pages/password', {alert: req.flash('info')})
@@ -120,6 +137,7 @@ app.post('/login', async (req, res) => {
         const checkPassword = await bcrypt.compare(password, foundReader.password)
         
         if (checkPassword) {
+            req.session.userAuthentication = true;
             res.redirect('/blog')
         } else {
             req.flash('info', 'Username or Password is incorrect')
@@ -142,6 +160,13 @@ app.post('/login', async (req, res) => {
             res.redirect('/')
         }
     }
+})
+
+app.post('/logout', (req, res) => {
+    req.session.destroy( (err) => {
+        if (err) throw err
+        res.redirect('/')
+    })
 })
 
 app.post('/changepassword', async (req, res) => {

@@ -14,6 +14,9 @@
                 <h3><%= foundReader.fullname %></h3>
                 <p>@<%= foundReader.username %></p>
             </div>
+            <form action="/logout" method="post">
+                <button type="submit">Logout</button>
+            </form>
         </div>
         <div id="container2">
             <div id="head"><h1>ARTICLES</h1></div>
@@ -26,7 +29,7 @@
                         <h3><%= element.title %></h3>
                         <h4>Author: <%= element.fullname %></h4>
                         <h4>Category: <%= element.category %></h4>
-                        <p><%= element.description.substring(0, 300) + "... " %><a href=/<%= element._id %>>see more</a></p>
+                        <p><%= element.description.substring(0, 300) + "... " %><a href=blogdetails/<%= element._id %>>see more</a></p>
                     </div>
                  </div>
                 <% }) %>
